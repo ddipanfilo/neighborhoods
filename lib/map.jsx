@@ -13,6 +13,8 @@ class Map extends React.Component {
   }
 
   drawNeighborhoods(array) {
+    let polygons = [];
+
     array.forEach((object) =>{
       for (var key in object) {
         let currentCoords = (object[key]);
@@ -24,13 +26,18 @@ class Map extends React.Component {
             strokeWeight: 2,
             fillColor: '#FF0000',
             fillOpacity: 0.40
-        }).setMap(this.map);
+        });
+        polygons.push(currentNeighborhood);
+        currentNeighborhood.setMap(this.map);
       }
     });
+
+    this.polygons = polygons;
   }
 
   createMap(position){
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
+    // this.setState({latitude: 40.739681, longitude: -73.990957});
 
     // const latitude = position.coords.latitude;
     // const longitude = position.coords.longitude;
@@ -54,12 +61,12 @@ class Map extends React.Component {
     });
 
     // var searchBox = new google.maps.places.SearchBox(this.map);
-    this.searchBar();
+    this.searchBar(marker);
     this.drawNeighborhoods(arrayToDraw);
     this.writeNeighborhood(arrayToDraw);
   }
 
-  searchBar(){
+  searchBar(originalMarker){
     const map = this.map;
     const that = this;
 
@@ -71,10 +78,11 @@ class Map extends React.Component {
       searchBox.setBounds(map.getBounds());
     });
 
-    var markers = [];
+    var markers = [originalMarker];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
+      that.clearPolygons();
       var places = searchBox.getPlaces();
 
       if (places.length === 0) {
@@ -103,6 +111,9 @@ class Map extends React.Component {
         };
 
         that.setState({latitude: place.geometry.location.lat(), longitude: place.geometry.location.lng()});
+        const arrayToDraw = selectObjects(that.state.latitude, that.state.longitude);
+        that.drawNeighborhoods(arrayToDraw);
+        that.writeNeighborhood(arrayToDraw);
         // Create a marker for each place.
         markers.push(new google.maps.Marker({
           map: map,
@@ -121,6 +132,13 @@ class Map extends React.Component {
 
       map.fitBounds(bounds);
     });
+  }
+
+  clearPolygons(){
+    this.polygons.forEach(function(polygon) {
+      polygon.setMap(null);
+    });
+    this.polygons = [];
   }
 
   writeNeighborhood(array) {
