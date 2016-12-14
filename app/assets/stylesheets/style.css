@@ -57,3 +57,14 @@ span {
   justify-content: center;
   align-items: center;
 }
+
+#david {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 5;
+  font-family: arial;
+  font-size: 13px;
+  color: #00b0ff;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}

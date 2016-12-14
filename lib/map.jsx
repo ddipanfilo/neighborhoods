@@ -158,6 +158,7 @@ class Map extends React.Component {
     });
     // finalArray = ["Chelsea", "Flatiron"];
     const string = finalArray.join(", ");
+    document.getElementById('david').innerHTML = "Developed by David DiPanfilo";
     document.getElementById('text').innerHTML = string;
   }
 
