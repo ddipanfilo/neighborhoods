@@ -4,6 +4,8 @@ import { neighborhoods } from './util/locations';
 import { selectObjects } from './util/functions';
 var inside = require('point-in-polygon');
 
+import {data} from '../raw/ny';
+
 class Map extends React.Component {
   constructor(props) {
     super(props);
@@ -164,7 +166,30 @@ class Map extends React.Component {
 
   }
 
+  scrape(){
+    let finalObject = {};
+    let i = 1;
+
+    data.forEach((object) => {
+      let coordinates = object.coordinates;
+      let newCoordinates = [];
+      coordinates[0].forEach((array) => {
+        let coordinateObj = {};
+        coordinateObj.lng = array[0];
+        coordinateObj.lat = array[1];
+        newCoordinates.push(coordinateObj);
+      });
+
+      let newObj = {};
+      finalObject[i] = newCoordinates;
+      i += 1;
+    });
+
+    let string = JSON.stringify(finalObject);
+  }
+
   render() {
+    this.scrape();
     return (
       <div className="parent-div">
         <input id="pac-input" className="none" type="text" placeholder="Search Box" />
@@ -174,6 +199,7 @@ class Map extends React.Component {
       </div>
     );
   }
+
 }
 
 export default Map;
