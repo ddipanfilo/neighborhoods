@@ -9,7 +9,7 @@ class Map extends React.Component {
     super(props);
 
     this.createMap = this.createMap.bind(this);
-    this.state = {location: {}};
+    this.state = {latitude: {}, longitude: {}};
   }
 
   drawNeighborhoods(array) {
@@ -30,18 +30,18 @@ class Map extends React.Component {
   }
 
   createMap(position){
-    this.setState({location: position});
+    this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
 
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
+    // const latitude = position.coords.latitude;
+    // const longitude = position.coords.longitude;
     // const latitude = 40.739681;
     // const longitude = -73.990957;
-    const arrayToDraw = selectObjects(latitude, longitude);
     // this.checkShapes(latitude, longitude);
 
+    const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
     const mapDOMNode = this.refs.map;
     const mapOptions = {
-      center: {lat: latitude, lng: longitude},
+      center: {lat: this.state.latitude, lng: this.state.longitude},
       zoom: 16
     };
 
@@ -50,7 +50,7 @@ class Map extends React.Component {
       map: this.map,
       draggable: true,
       animation: null,
-      position: {lat: latitude, lng: longitude}
+      position: {lat: this.state.latitude, lng: this.state.longitude}
     });
 
     // var searchBox = new google.maps.places.SearchBox(this.map);
@@ -61,6 +61,7 @@ class Map extends React.Component {
 
   searchBar(){
     const map = this.map;
+    const that = this;
 
     document.getElementById('pac-input').className = "pac-input";
     var input = document.getElementById('pac-input');
@@ -101,6 +102,7 @@ class Map extends React.Component {
           scaledSize: new google.maps.Size(25, 25)
         };
 
+        that.setState({latitude: place.geometry.location.lat(), longitude: place.geometry.location.lng()});
         // Create a marker for each place.
         markers.push(new google.maps.Marker({
           map: map,
@@ -116,6 +118,7 @@ class Map extends React.Component {
           bounds.extend(place.geometry.location);
         }
       });
+
       map.fitBounds(bounds);
     });
   }
