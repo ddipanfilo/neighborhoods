@@ -18,7 +18,31 @@ span {
   font-family: arial;
   font-size: 70px;
   color: #00b0ff;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  bottom: 10px;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+  bottom: 20px;
   right: 60px;
+}
+
+.pac-input {
+  position: absolute;
+  background-color: #fff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+  height: 30px;
+  z-index: 5;
+  top: 20px;
+  right: 60px;
+}
+
+.pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.none {
+  display: none;
 }

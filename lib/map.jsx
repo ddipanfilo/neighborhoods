@@ -7,6 +7,9 @@ var inside = require('point-in-polygon');
 class Map extends React.Component {
   constructor(props) {
     super(props);
+
+    this.createMap = this.createMap.bind(this);
+    this.state = {location: {}};
   }
 
   drawNeighborhoods(array) {
@@ -27,6 +30,8 @@ class Map extends React.Component {
   }
 
   createMap(position){
+    this.setState({location: position});
+
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     // const latitude = 40.739681;
@@ -48,8 +53,71 @@ class Map extends React.Component {
       position: {lat: latitude, lng: longitude}
     });
 
+    // var searchBox = new google.maps.places.SearchBox(this.map);
+    this.searchBar();
     this.drawNeighborhoods(arrayToDraw);
     this.writeNeighborhood(arrayToDraw);
+  }
+
+  searchBar(){
+    const map = this.map;
+
+    document.getElementById('pac-input').className = "pac-input";
+    var input = document.getElementById('pac-input');
+
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length === 0) {
+        return;
+      }
+
+      // Clear out the old markers.
+      markers.forEach(function(marker) {
+        marker.setMap(null);
+      });
+      markers = [];
+
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+        var icon = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
+
+        // Create a marker for each place.
+        markers.push(new google.maps.Marker({
+          map: map,
+          icon: icon,
+          title: place.name,
+          position: place.geometry.location
+        }));
+
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
   }
 
   writeNeighborhood(array) {
@@ -61,17 +129,19 @@ class Map extends React.Component {
         }
       }
     });
-    finalArray = ["Chelsea", "Flatiron"];
+    // finalArray = ["Chelsea", "Flatiron"];
     const string = finalArray.join(", ");
     document.getElementById('text').innerHTML = string;
   }
 
   componentDidMount() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) =>
-        this.createMap(position)
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.createMap(position);
+        }
       );
     }
+
   }
 
   render() {
