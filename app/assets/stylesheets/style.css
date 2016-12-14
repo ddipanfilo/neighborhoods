@@ -7,3 +7,18 @@
 body {
   overflow: hidden;
 }
+
+span {
+  font-size: 14px;
+  font-family: Arial;
+}
+
+#text {
+  position: absolute;
+  font-family: arial;
+  font-size: 70px;
+  color: #00b0ff;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  bottom: 10px;
+  right: 60px;
+}
