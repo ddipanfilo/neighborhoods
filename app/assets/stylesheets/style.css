@@ -47,6 +47,10 @@ span {
   display: none;
 }
 
+#none {
+  display: none;
+}
+
 .loading {
   position: absolute;
   margin: 0 auto;
@@ -67,4 +71,11 @@ span {
   font-size: 13px;
   color: #00b0ff;
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+
+.zillow {
+  position: absolute;
+  bottom: 35px;
+  left: -6px;
+  z-index: 5;
 }
