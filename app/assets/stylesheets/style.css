@@ -1,0 +1,9 @@
+.map {
+  width: 100%;
+  height: 98vh;
+  overflow: hidden;
+}
+
+body {
+  overflow: hidden;
+}
