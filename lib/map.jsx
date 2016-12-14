@@ -19,6 +19,10 @@ class Map extends React.Component {
     let colorIdx = 0;
 
     array.forEach((object) => {
+      if (colorIdx === 5) {
+        colorIdx = 0;
+      }
+
       for (var key in object) {
         let currentCoords = (object[key]);
         let currentNeighborhood =
@@ -42,12 +46,6 @@ class Map extends React.Component {
   createMap(position){
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
     // this.setState({latitude: 40.739681, longitude: -73.990957});
-
-    // const latitude = position.coords.latitude;
-    // const longitude = position.coords.longitude;
-    // const latitude = 40.739681;
-    // const longitude = -73.990957;
-    // this.checkShapes(latitude, longitude);
 
     const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
     const mapDOMNode = this.refs.map;
@@ -106,13 +104,6 @@ class Map extends React.Component {
           console.log("Returned place contains no geometry");
           return;
         }
-        // var icon = {
-        //   url: place.icon,
-        //   size: new google.maps.Size(71, 71),
-        //   origin: new google.maps.Point(0, 0),
-        //   anchor: new google.maps.Point(17, 34),
-        //   scaledSize: new google.maps.Size(25, 25)
-        // };
 
         that.setState({latitude: place.geometry.location.lat(), longitude: place.geometry.location.lng()});
         const arrayToDraw = selectObjects(that.state.latitude, that.state.longitude);
@@ -185,67 +176,3 @@ class Map extends React.Component {
 }
 
 export default Map;
-
-// selectObjects(latitude, longitude){
-//   let array = [];
-//   for (var key in neighborhoods) {
-//     if (neighborhoods.hasOwnProperty(key)) {
-//       if (inside([latitude, longitude], this.convertObjectToIndividualObject(neighborhoods[key]))) {
-//         let newObject = {};
-//         newObject[key] = neighborhoods[key];
-//         array.push(newObject);
-//       }
-//     }
-//   }
-//   return array;
-// }
-//
-// convertObjectToIndividualObject(object) {
-//   let array = [];
-//   for (var key in object) {
-//     if (Object.prototype.hasOwnProperty.call(object, key)) {
-//       var value = object[key];
-//       array.push(this.convertObjectToArray(value));
-//     }
-//   }
-//   return array;
-// }
-//
-// convertObjectToArray(object){
-//   let array = [];
-//   for (var key in object) {
-//     if (Object.prototype.hasOwnProperty.call(object, key)) {
-//       var value = object[key];
-//         array.push(value);
-//     }
-//   }
-//   return array;
-// }
-
-// checkShapes(latitude, longitude) {
-//
-//   let chelseaPolygon = [[40.737360, -73.996847], [40.742400, -74.009207],
-//     [40.750659, -74.009058], [40.757037, -74.004952], [40.749810, -73.987793]];
-//   let flatironPolygon = [[40.737377, -73.996850], [40.742903, -73.992809],
-//     [40.740161, -73.986294], [40.737144, -73.988523], [40.738489, -73.991817],
-//     [40.736005,-73.993652]];
-//
-//     let testArray = [chelseaPolygon, flatironPolygon];
-//
-//     // testArray.forEach((polygon) => {
-//     //   console.log(inside([latitude, longitude], polygon));
-//     // });
-//
-//
-//       // inside([ latitude, longitude ], chelseaPolygon),
-//       // inside([ latitude, longitude ], flatironPolygon)
-//
-// }
-
-// chelsea.setMap(this.map);
-// flatiron.setMap(this.map);
-
-// const _getCoordsObj = latLng => ({
-//   lat: latLng.lat(),
-//   lng: latLng.lng()
-// });
