@@ -46,3 +46,14 @@ span {
 .none {
   display: none;
 }
+
+.loading {
+  position: absolute;
+  margin: 0 auto;
+}
+
+.parent-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -173,7 +173,10 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div className="map" id="map-container" ref="map"></div>
+      <div className="parent-div">
+        <img className="loading" src="./app/assets/images/ring.gif"></img>
+        <div className="map" id="map-container" ref="map"></div>
+      </div>
     );
   }
 }
