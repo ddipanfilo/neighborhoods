@@ -15,20 +15,24 @@ class Map extends React.Component {
   drawNeighborhoods(array) {
     let polygons = [];
 
-    array.forEach((object) =>{
+    let colors = ["#FF0000", "#0000FF", "#00ff00", "#ffff00"];
+    let colorIdx = 0;
+
+    array.forEach((object) => {
       for (var key in object) {
         let currentCoords = (object[key]);
         let currentNeighborhood =
           new google.maps.Polygon({
             paths: currentCoords,
-            strokeColor: '#FF0000',
+            strokeColor: colors[colorIdx],
             strokeOpacity: 0.4,
             strokeWeight: 2,
-            fillColor: '#FF0000',
+            fillColor: colors[colorIdx],
             fillOpacity: 0.40
         });
         polygons.push(currentNeighborhood);
         currentNeighborhood.setMap(this.map);
+        colorIdx += 1;
       }
     });
 
@@ -49,13 +53,13 @@ class Map extends React.Component {
     const mapDOMNode = this.refs.map;
     const mapOptions = {
       center: {lat: this.state.latitude, lng: this.state.longitude},
-      zoom: 16
+      zoom: 15
     };
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     let marker = new google.maps.Marker({
       map: this.map,
-      draggable: true,
+      draggable: false,
       animation: null,
       position: {lat: this.state.latitude, lng: this.state.longitude}
     });
@@ -102,13 +106,13 @@ class Map extends React.Component {
           console.log("Returned place contains no geometry");
           return;
         }
-        var icon = {
-          url: place.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 25)
-        };
+        // var icon = {
+        //   url: place.icon,
+        //   size: new google.maps.Size(71, 71),
+        //   origin: new google.maps.Point(0, 0),
+        //   anchor: new google.maps.Point(17, 34),
+        //   scaledSize: new google.maps.Size(25, 25)
+        // };
 
         that.setState({latitude: place.geometry.location.lat(), longitude: place.geometry.location.lng()});
         const arrayToDraw = selectObjects(that.state.latitude, that.state.longitude);
@@ -117,7 +121,8 @@ class Map extends React.Component {
         // Create a marker for each place.
         markers.push(new google.maps.Marker({
           map: map,
-          icon: icon,
+          draggable: false,
+          animation: null,
           title: place.name,
           position: place.geometry.location
         }));
@@ -131,6 +136,7 @@ class Map extends React.Component {
       });
 
       map.fitBounds(bounds);
+      map.setZoom(15);
     });
   }
 
