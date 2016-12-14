@@ -174,8 +174,10 @@ class Map extends React.Component {
   render() {
     return (
       <div className="parent-div">
+        <input id="pac-input" className="none" type="text" placeholder="Search Box" />
         <img className="loading" src="./app/assets/images/ripple.gif"></img>
         <div className="map" id="map-container" ref="map"></div>
+        <div id="text"></div>
       </div>
     );
   }

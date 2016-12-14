@@ -20,7 +20,7 @@ span {
   color: #00b0ff;
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
   bottom: 20px;
-  right: 60px;
+  /*right: 60px;*/
 }
 
 .pac-input {
@@ -36,7 +36,7 @@ span {
   height: 30px;
   z-index: 5;
   top: 20px;
-  right: 60px;
+  /*right: 60px;*/
 }
 
 .pac-input:focus {
