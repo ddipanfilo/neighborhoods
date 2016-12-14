@@ -21690,7 +21690,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'parent-div' },
-	        _react2.default.createElement('img', { className: 'loading', src: './app/assets/images/ring.gif' }),
+	        _react2.default.createElement('img', { className: 'loading', src: './app/assets/images/ripple.gif' }),
 	        _react2.default.createElement('div', { className: 'map', id: 'map-container', ref: 'map' })
 	      );
 	    }
