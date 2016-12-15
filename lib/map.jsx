@@ -4,7 +4,7 @@ import { neighborhoods } from './util/locations';
 import { selectObjects } from './util/functions';
 var inside = require('point-in-polygon');
 
-import {data} from '../raw/ny';
+// import {data} from '../raw/ny';
 
 class Map extends React.Component {
   constructor(props) {
@@ -21,12 +21,13 @@ class Map extends React.Component {
     let colorIdx = 0;
 
     array.forEach((object) => {
-      if (colorIdx === 5) {
-        colorIdx = 0;
-      }
 
       for (var key in object) {
+        if (colorIdx === 4) {
+          colorIdx = 0;
+        }
         let currentCoords = (object[key]);
+
         let currentNeighborhood =
           new google.maps.Polygon({
             paths: currentCoords,
@@ -49,7 +50,8 @@ class Map extends React.Component {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
     // this.setState({latitude: 40.739681, longitude: -73.990957});
 
-    const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
+    // const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
+    const arrayToDraw = [neighborhoods];
     const mapDOMNode = this.refs.map;
     const mapOptions = {
       center: {lat: this.state.latitude, lng: this.state.longitude},
@@ -67,7 +69,7 @@ class Map extends React.Component {
     // var searchBox = new google.maps.places.SearchBox(this.map);
     this.searchBar(marker);
     this.drawNeighborhoods(arrayToDraw);
-    this.writeNeighborhood(arrayToDraw);
+    // this.writeNeighborhood(arrayToDraw);
   }
 
   searchBar(originalMarker){
@@ -189,7 +191,7 @@ class Map extends React.Component {
   }
 
   render() {
-    this.scrape();
+    // this.scrape();
     return (
       <div className="parent-div">
         <input id="pac-input" className="none" type="text" placeholder="Search Box" />
