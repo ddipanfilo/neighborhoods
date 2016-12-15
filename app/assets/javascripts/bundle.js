@@ -21560,8 +21560,8 @@
 	      this.setState({ latitude: position.coords.latitude, longitude: position.coords.longitude });
 	      // this.setState({latitude: 40.739681, longitude: -73.990957});
 	
-	      // const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
-	      var arrayToDraw = [_locations.neighborhoods];
+	      var arrayToDraw = (0, _functions.selectObjects)(this.state.latitude, this.state.longitude);
+	      // const arrayToDraw = [neighborhoods];
 	      var mapDOMNode = this.refs.map;
 	      var mapOptions = {
 	        center: { lat: this.state.latitude, lng: this.state.longitude },
@@ -21579,7 +21579,7 @@
 	      // var searchBox = new google.maps.places.SearchBox(this.map);
 	      this.searchBar(marker);
 	      this.drawNeighborhoods(arrayToDraw);
-	      // this.writeNeighborhood(arrayToDraw);
+	      this.writeNeighborhood(arrayToDraw);
 	    }
 	  }, {
 	    key: 'searchBar',
@@ -21735,7 +21735,15 @@
 	});
 	var neighborhoods = exports.neighborhoods = {
 	  "Chelsea": [{ lat: 40.737360, lng: -73.996847 }, { lat: 40.742400, lng: -74.009207 }, { lat: 40.750659, lng: -74.009058 }, { lat: 40.757037, lng: -74.004952 }, { lat: 40.749810, lng: -73.987793 }],
-	  "Flatiron": [{ lat: 40.737377, lng: -73.996850 }, { lat: 40.742903, lng: -73.992809 }, { lat: 40.740161, lng: -73.986294 }, { lat: 40.737144, lng: -73.988523 }, { lat: 40.738489, lng: -73.991817 }, { lat: 40.736005, lng: -73.993652 }]
+	  "Flatiron": [{ lat: 40.737377, lng: -73.996850 }, { lat: 40.742903, lng: -73.992809 }, { lat: 40.740161, lng: -73.986294 }, { lat: 40.737144, lng: -73.988523 }, { lat: 40.738489, lng: -73.991817 }, { lat: 40.736005, lng: -73.993652 }],
+	  "Meatpacking": [{ lat: 40.742575, lng: -74.009093 }, { lat: 40.740858, lng: -74.005201 }, { lat: 40.739400, lng: -74.005407 }, { lat: 40.739325, lng: -74.010160 }
+	  // Gansevoort & 11
+	  ],
+	  "West Village": [{ lat: 40.739325, lng: -74.010160 }, { lat: 40.739422, lng: -74.006427 },
+	  // Gansevoort & 9
+	  { lat: 40.740936, lng: -74.005414 }, { lat: 40.737344, lng: -73.996868 }, { lat: 40.728366, lng: -74.002824 },
+	  // Houston & 6
+	  { lat: 40.729122, lng: -74.010785 }]
 	};
 
 /***/ },

@@ -50,8 +50,8 @@ class Map extends React.Component {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
     // this.setState({latitude: 40.739681, longitude: -73.990957});
 
-    // const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
-    const arrayToDraw = [neighborhoods];
+    const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
+    // const arrayToDraw = [neighborhoods];
     const mapDOMNode = this.refs.map;
     const mapOptions = {
       center: {lat: this.state.latitude, lng: this.state.longitude},
@@ -69,7 +69,7 @@ class Map extends React.Component {
     // var searchBox = new google.maps.places.SearchBox(this.map);
     this.searchBar(marker);
     this.drawNeighborhoods(arrayToDraw);
-    // this.writeNeighborhood(arrayToDraw);
+    this.writeNeighborhood(arrayToDraw);
   }
 
   searchBar(originalMarker){
