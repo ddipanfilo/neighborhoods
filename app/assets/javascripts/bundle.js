@@ -21645,6 +21645,7 @@
 	          }
 	        });
 	
+	        document.getElementById('pac-input').value = "";
 	        map.fitBounds(bounds);
 	        map.setZoom(15);
 	      });
