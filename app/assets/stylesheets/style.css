@@ -22,23 +22,23 @@ span {
   color: #00b0ff;
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
   bottom: 20px;
-  /*right: 60px;*/
+  right: 60px;
 }
 
 .pac-input {
   position: absolute;
   background-color: #fff;
   font-family: Arial;
-  font-size: 15px;
+  font-size: 24px;
   font-weight: 300;
   margin-left: 12px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 300px;
-  height: 30px;
+  width: 500px;
+  height: 80px;
   z-index: 5;
   top: 20px;
-  /*right: 60px;*/
+  right: 60px;
 }
 
 .pac-input:focus {
@@ -66,11 +66,11 @@ span {
 
 #david {
   position: absolute;
-  top: 30px;
-  right: 30px;
+  bottom: 40px;
+  left: 15px;
   z-index: 5;
   font-family: arial;
-  font-size: 13px;
+  font-size: 20px;
   color: #00b0ff;
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
 }
