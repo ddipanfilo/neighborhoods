@@ -18,7 +18,7 @@ span {
 #text {
   position: absolute;
   font-family: arial;
-  font-size: 50px;
+  font-size: 70px;
   color: #00b0ff;
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
   bottom: 20px;
@@ -70,7 +70,7 @@ span {
 
 #david {
   position: absolute;
-  bottom: 40px;
+  bottom: 4%;
   left: 15px;
   z-index: 5;
   font-family: arial;
