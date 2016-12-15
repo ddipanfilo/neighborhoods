@@ -67,6 +67,7 @@ class Map extends React.Component {
       map: this.map,
       draggable: false,
       animation: null,
+      scrollwheel: false,
       position: {lat: this.state.latitude, lng: this.state.longitude}
     });
 
