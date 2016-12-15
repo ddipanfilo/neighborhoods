@@ -47,8 +47,12 @@ class Map extends React.Component {
   }
 
   createMap(position){
-    this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
-    // this.setState({latitude: 40.739681, longitude: -73.990957});
+    if ((position.coords.latitude < 41.1111 && position.coords.latitude > 40.5083) &&
+    (position.coords.longitude < -73.5223 && position.coords.longitude > -74.2062)) {
+      this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
+    } else {
+      this.setState({latitude: 40.739681, longitude: -73.990957});
+    }
 
     const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
     // const arrayToDraw = [neighborhoods];
