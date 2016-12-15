@@ -21670,7 +21670,8 @@
 	        }
 	      });
 	      // finalArray = ["Chelsea", "Flatiron"];
-	      var string = finalArray.join(", ");
+	      var string = finalArray.join("+ ");
+	
 	      document.getElementById('david').innerHTML = "Developed by David DiPanfilo";
 	      document.getElementById('zillow').className = "zillow";
 	      document.getElementById('text').innerHTML = string;

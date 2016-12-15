@@ -21,8 +21,10 @@ span {
   font-size: 70px;
   color: #00b0ff;
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
-  bottom: 20px;
+  bottom: 30px;
   right: 60px;
+  max-width: 50%;
+  text-align: right;
 }
 
 .pac-input {
