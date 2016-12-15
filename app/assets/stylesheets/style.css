@@ -29,7 +29,7 @@ span {
   position: absolute;
   background-color: #fff;
   font-family: Arial;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 300;
   margin-left: 12px;
   padding: 0 11px 0 13px;
@@ -43,6 +43,7 @@ span {
 
 .pac-input:focus {
   border-color: #4d90fe;
+  font-size: 30px;
 }
 
 .none {
