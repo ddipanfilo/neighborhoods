@@ -48,6 +48,15 @@ span {
   font-size: 50px;
 }
 
+.pac-item { height: 40px;
+  display: flex;
+  align-items: center;}
+.pac-item-query { font-size: 30px; }
+.pac-item { font-size: 30px; }
+.pac-item-container { font-size: 30px; }
+.pac-item-matched { font-size: 30px; }
+span { font-size: 30px; }
+
 .none {
   display: none;
 }
