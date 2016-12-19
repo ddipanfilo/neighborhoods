@@ -21557,11 +21557,13 @@
 	  }, {
 	    key: 'createMap',
 	    value: function createMap(position) {
-	      if (position.coords.latitude < 41.1111 && position.coords.latitude > 40.5083 && position.coords.longitude < -73.5223 && position.coords.longitude > -74.2062) {
-	        this.setState({ latitude: position.coords.latitude, longitude: position.coords.longitude });
-	      } else {
-	        this.setState({ latitude: 40.739681, longitude: -73.990957 });
-	      }
+	      // if ((position.coords.latitude < 41.1111 && position.coords.latitude > 40.5083) &&
+	      // (position.coords.longitude < -73.5223 && position.coords.longitude > -74.2062)) {
+	      //   this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
+	      // } else {
+	      //   this.setState({latitude: 40.739681, longitude: -73.990957});
+	      // }
+	      this.setState({ latitude: 40.739681, longitude: -73.990957 });
 	
 	      var arrayToDraw = (0, _functions.selectObjects)(this.state.latitude, this.state.longitude);
 	      // const arrayToDraw = [neighborhoods];
@@ -21681,11 +21683,16 @@
 	    value: function componentDidMount() {
 	      var _this3 = this;
 	
-	      if (navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(function (position) {
-	          _this3.createMap(position);
-	        });
-	      }
+	      // if (navigator.geolocation) {
+	      //     navigator.geolocation.getCurrentPosition((position) => {
+	      //       this.createMap(position);
+	      //     }
+	      //   );
+	      // }
+	
+	      setTimeout(function () {
+	        _this3.createMap();
+	      }, 2000);
 	    }
 	  }, {
 	    key: 'scrape',
