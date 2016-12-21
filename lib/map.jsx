@@ -47,15 +47,20 @@ class Map extends React.Component {
   }
 
   createMap(position){
-    // if ((position.coords.latitude < 41.1111 && position.coords.latitude > 40.5083) &&
-    // (position.coords.longitude < -73.5223 && position.coords.longitude > -74.2062)) {
-    //   this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
+    // if ((position.coords.latitude < 41.1111 &&
+    // position.coords.latitude > 40.5083) &&
+    // (position.coords.longitude < -73.5223 &&
+    // position.coords.longitude > -74.2062)) {
+    //   this.setState({latitude: position.coords.latitude,
+    // longitude: position.coords.longitude});
     // } else {
     //   this.setState({latitude: 40.739681, longitude: -73.990957});
     // }
-    this.setState({latitude: 40.739681, longitude: -73.990957});
 
-    const arrayToDraw = selectObjects(this.state.latitude, this.state.longitude);
+    this.setState({latitude: 40.739681, longitude: -73.990957});
+    const arrayToDraw = selectObjects(this.state.latitude,
+      this.state.longitude
+    );
     // const arrayToDraw = [neighborhoods];
     const mapDOMNode = this.refs.map;
     const mapOptions = {
@@ -74,8 +79,24 @@ class Map extends React.Component {
 
     // var searchBox = new google.maps.places.SearchBox(this.map);
     this.searchBar(marker);
+    this.mouseHover(marker);
     this.drawNeighborhoods(arrayToDraw);
     this.writeNeighborhood(arrayToDraw);
+  }
+
+  mouseHover(originalMarker) {
+    const that = this;
+    google.maps.event.addListener(this.map, 'mousemove', function(event) {
+      that.setState({latitude: event.latLng.lat(), longitude: event.latLng.lng()});
+      const arrayToDraw = selectObjects(that.state.latitude,
+        that.state.longitude
+      );
+      that.writeNeighborhood(arrayToDraw);
+      that.clearPolygons();
+      that.drawNeighborhoods(arrayToDraw);
+    });
+
+
   }
 
   searchBar(originalMarker){
@@ -115,8 +136,10 @@ class Map extends React.Component {
           return;
         }
 
-        that.setState({latitude: place.geometry.location.lat(), longitude: place.geometry.location.lng()});
-        const arrayToDraw = selectObjects(that.state.latitude, that.state.longitude);
+        that.setState({latitude: place.geometry.location.lat(),
+          longitude: place.geometry.location.lng()});
+        const arrayToDraw = selectObjects(that.state.latitude,
+          that.state.longitude);
         that.drawNeighborhoods(arrayToDraw);
         that.writeNeighborhood(arrayToDraw);
         // Create a marker for each place.
@@ -204,7 +227,9 @@ class Map extends React.Component {
     // this.scrape();
     return (
       <div className="parent-div">
-        <input id="pac-input" className="none" type="text" placeholder="Search Box" />
+        <input id="pac-input" className="none"
+          type="text" placeholder="Search Box"
+        />
         <img className="loading" src="./app/assets/images/ripple.gif"></img>
         <div className="map" id="map-container" ref="map"></div>
         <div id="text"></div>

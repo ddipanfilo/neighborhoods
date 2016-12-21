@@ -836,12 +836,18 @@
 	 * will remain to ensure logic does not differ in production.
 	 */
 	
-	function invariant(condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
+	var validateFormat = function validateFormat(format) {};
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  validateFormat = function validateFormat(format) {
 	    if (format === undefined) {
 	      throw new Error('invariant requires an error message argument');
 	    }
-	  }
+	  };
+	}
+	
+	function invariant(condition, format, a, b, c, d, e, f) {
+	  validateFormat(format);
 	
 	  if (!condition) {
 	    var error;
@@ -21557,14 +21563,17 @@
 	  }, {
 	    key: 'createMap',
 	    value: function createMap(position) {
-	      // if ((position.coords.latitude < 41.1111 && position.coords.latitude > 40.5083) &&
-	      // (position.coords.longitude < -73.5223 && position.coords.longitude > -74.2062)) {
-	      //   this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
+	      // if ((position.coords.latitude < 41.1111 &&
+	      // position.coords.latitude > 40.5083) &&
+	      // (position.coords.longitude < -73.5223 &&
+	      // position.coords.longitude > -74.2062)) {
+	      //   this.setState({latitude: position.coords.latitude,
+	      // longitude: position.coords.longitude});
 	      // } else {
 	      //   this.setState({latitude: 40.739681, longitude: -73.990957});
 	      // }
-	      this.setState({ latitude: 40.739681, longitude: -73.990957 });
 	
+	      this.setState({ latitude: 40.739681, longitude: -73.990957 });
 	      var arrayToDraw = (0, _functions.selectObjects)(this.state.latitude, this.state.longitude);
 	      // const arrayToDraw = [neighborhoods];
 	      var mapDOMNode = this.refs.map;
@@ -21584,8 +21593,21 @@
 	
 	      // var searchBox = new google.maps.places.SearchBox(this.map);
 	      this.searchBar(marker);
+	      this.mouseHover(marker);
 	      this.drawNeighborhoods(arrayToDraw);
 	      this.writeNeighborhood(arrayToDraw);
+	    }
+	  }, {
+	    key: 'mouseHover',
+	    value: function mouseHover(originalMarker) {
+	      var that = this;
+	      google.maps.event.addListener(this.map, 'mousemove', function (event) {
+	        that.setState({ latitude: event.latLng.lat(), longitude: event.latLng.lng() });
+	        var arrayToDraw = (0, _functions.selectObjects)(that.state.latitude, that.state.longitude);
+	        that.writeNeighborhood(arrayToDraw);
+	        that.clearPolygons();
+	        that.drawNeighborhoods(arrayToDraw);
+	      });
 	    }
 	  }, {
 	    key: 'searchBar',
@@ -21626,7 +21648,8 @@
 	            return;
 	          }
 	
-	          that.setState({ latitude: place.geometry.location.lat(), longitude: place.geometry.location.lng() });
+	          that.setState({ latitude: place.geometry.location.lat(),
+	            longitude: place.geometry.location.lng() });
 	          var arrayToDraw = (0, _functions.selectObjects)(that.state.latitude, that.state.longitude);
 	          that.drawNeighborhoods(arrayToDraw);
 	          that.writeNeighborhood(arrayToDraw);
@@ -21724,7 +21747,9 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'parent-div' },
-	        _react2.default.createElement('input', { id: 'pac-input', className: 'none', type: 'text', placeholder: 'Search Box' }),
+	        _react2.default.createElement('input', { id: 'pac-input', className: 'none',
+	          type: 'text', placeholder: 'Search Box'
+	        }),
 	        _react2.default.createElement('img', { className: 'loading', src: './app/assets/images/ripple.gif' }),
 	        _react2.default.createElement('div', { className: 'map', id: 'map-container', ref: 'map' }),
 	        _react2.default.createElement('div', { id: 'text' })
