@@ -78,7 +78,6 @@ class Map extends React.Component {
       position: {lat: this.state.latitude, lng: this.state.longitude}
     });
     this.markers.push(marker);
-    console.log(this.markers);
 
     // var searchBox = new google.maps.places.SearchBox(this.map);
     this.searchBar(marker);
@@ -139,7 +138,7 @@ class Map extends React.Component {
       var bounds = new google.maps.LatLngBounds();
       places.forEach(function(place) {
         if (!place.geometry) {
-          console.log("Returned place contains no geometry");
+          // console.log("Returned place contains no geometry");
           return;
         }
 
