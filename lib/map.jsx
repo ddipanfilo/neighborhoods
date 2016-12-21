@@ -69,6 +69,7 @@ class Map extends React.Component {
     };
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
+    this.markers = [];
     let marker = new google.maps.Marker({
       map: this.map,
       draggable: false,
@@ -76,6 +77,8 @@ class Map extends React.Component {
       scrollwheel: false,
       position: {lat: this.state.latitude, lng: this.state.longitude}
     });
+    this.markers.push(marker);
+    console.log(this.markers);
 
     // var searchBox = new google.maps.places.SearchBox(this.map);
     this.searchBar(marker);
@@ -87,6 +90,9 @@ class Map extends React.Component {
   mouseHover(originalMarker) {
     const that = this;
     google.maps.event.addListener(this.map, 'mousemove', function(event) {
+      that.markers.forEach( marker =>
+        marker.setMap(null)
+      );
       that.setState({latitude: event.latLng.lat(), longitude: event.latLng.lng()});
       const arrayToDraw = selectObjects(that.state.latitude,
         that.state.longitude
@@ -112,7 +118,8 @@ class Map extends React.Component {
     });
 
     var markers = [originalMarker];
-    // Listen for the event fired when the user selects a prediction and retrieve
+    // Listen for the event fired when the user
+    // selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
       that.clearPolygons();
@@ -123,10 +130,10 @@ class Map extends React.Component {
       }
 
       // Clear out the old markers.
-      markers.forEach(function(marker) {
+      that.markers.forEach(function(marker) {
         marker.setMap(null);
       });
-      markers = [];
+      that.markers = [];
 
       // For each place, get the icon, name and location.
       var bounds = new google.maps.LatLngBounds();
@@ -143,7 +150,7 @@ class Map extends React.Component {
         that.drawNeighborhoods(arrayToDraw);
         that.writeNeighborhood(arrayToDraw);
         // Create a marker for each place.
-        markers.push(new google.maps.Marker({
+        that.markers.push(new google.maps.Marker({
           map: map,
           draggable: false,
           animation: null,
