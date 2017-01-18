@@ -21725,7 +21725,7 @@
 	
 	      setTimeout(function () {
 	        _this5.createMap();
-	      }, 2000);
+	      }, 300);
 	    }
 	  }, {
 	    key: 'render',

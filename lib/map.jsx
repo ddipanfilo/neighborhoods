@@ -198,7 +198,7 @@ class Map extends React.Component {
       //   );
       // }
 
-    setTimeout( () => { this.createMap(); }, 2000);
+    setTimeout( () => { this.createMap(); }, 300);
   }
 
   render() {
