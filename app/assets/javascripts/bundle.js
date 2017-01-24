@@ -21560,18 +21560,16 @@
 	    key: 'createMap',
 	    value: function createMap(position) {
 	      // Add current location
-	      // if ((position.coords.latitude < 41.1111 &&
-	      //   position.coords.latitude > 40.5083) &&
-	      //   (position.coords.longitude < -73.5223 &&
-	      //     position.coords.longitude > -74.2062)
-	      //   ) { this.setState({latitude: position.coords.latitude,
-	      //     longitude: position.coords.longitude
-	      //   });
-	      // } else {
-	      //   this.setState({latitude: 40.739681, longitude: -73.990957});
-	      // }
+	      if (position.coords.latitude < 41.1111 && position.coords.latitude > 40.5083 && position.coords.longitude < -73.5223 && position.coords.longitude > -74.2062) {
+	        this.setState({
+	          latitude: position.coords.latitude,
+	          longitude: position.coords.longitude
+	        });
+	      } else {
+	        this.setState({ latitude: 40.739681, longitude: -73.990957 });
+	      }
 	
-	      this.setState({ latitude: 40.739681, longitude: -73.990957 });
+	      // this.setState({latitude: 40.739681, longitude: -73.990957});
 	
 	      var mapDOMNode = this.refs.map;
 	      var mapOptions = {
@@ -21716,16 +21714,13 @@
 	      var _this5 = this;
 	
 	      // For current location
-	      // if (navigator.geolocation) {
-	      //     navigator.geolocation.getCurrentPosition((position) => {
-	      //       this.createMap(position);
-	      //     }
-	      //   );
-	      // }
+	      if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(function (position) {
+	          _this5.createMap(position);
+	        });
+	      }
 	
-	      setTimeout(function () {
-	        _this5.createMap();
-	      }, 300);
+	      // setTimeout( () => { this.createMap(); }, 300);
 	    }
 	  }, {
 	    key: 'render',
