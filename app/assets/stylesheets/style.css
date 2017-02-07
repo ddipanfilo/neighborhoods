@@ -45,17 +45,17 @@ span {
 
 .pac-input:focus {
   border-color: #4d90fe;
-  font-size: 50px;
+  font-size: 28px;
 }
 
-.pac-item { height: 40px;
+.pac-item { height: 30px;
   display: flex;
   align-items: center;}
-.pac-item-query { font-size: 30px; }
-.pac-item { font-size: 30px; }
-.pac-item-container { font-size: 30px; }
-.pac-item-matched { font-size: 30px; }
-span { font-size: 30px; }
+.pac-item-query { font-size: 20px; }
+.pac-item { font-size: 20px; }
+.pac-item-container { font-size: 20px; }
+.pac-item-matched { font-size: 20px; }
+span { font-size: 20px; }
 
 .none {
   display: none;
@@ -95,4 +95,36 @@ span { font-size: 30px; }
   bottom: 35px;
   left: -6px;
   z-index: 5;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .pac-input {
+    position: absolute;
+    background-color: #fff;
+    font-family: Arial;
+    font-size: 50px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 500px;
+    height: 80px;
+    z-index: 5;
+    top: 20px;
+    right: 60px;
+  }
+
+  .pac-input:focus {
+    border-color: #4d90fe;
+    font-size: 50px;
+  }
+
+  .pac-item { height: 60px;
+    display: flex;
+    align-items: center;}
+  .pac-item-query { font-size: 50px; }
+  .pac-item { font-size: 50px; }
+  .pac-item-container { font-size: 50px; }
+  .pac-item-matched { font-size: 50px; }
+  span { font-size: 50px; }
 }
